@@ -1,12 +1,12 @@
 const router = require("express").Router();
-const Celebrities = require("../models/Celebrity.model.js")
+const Celebrity = require("../models/Celebrity.model.js")
 
-// GET "/celebrities/create" => Show a form to create a celebrity
+// GET "/Celebrity/create" => Show a form to create a celebrity
 router.get("/create", (req, res, next) => {
   res.render("celebrities/new-celebrity.hbs")
 });
 
-// POST "/celebrities/create" => Send the data from the form to this route to create the celebrity and save it to the database
+// POST "/Celebrity/create" => Send the data from the form to this route to create the celebrity and save it to the database
 router.post("/create", async (req, res, next) => {
   const { name, occupation, catchPhrase } = req.body;
   console.log(req.body)
@@ -16,8 +16,8 @@ router.post("/create", async (req, res, next) => {
   }
 
   try {
-    await Celebrities.create( { name, occupation, catchPhrase } )
-    res.redirect("/")
+    await Celebrity.create( { name, occupation, catchPhrase } )
+    res.redirect("/celebrity")
   } catch (error) {
     next(error)
   }
@@ -25,9 +25,11 @@ router.post("/create", async (req, res, next) => {
 
 router.get("/", async (req, res, next) => {
   try {
-    const allCelebrities = await Celebrities.find()
+    const allCelebrity = await Celebrity.find()
+    console.log(allCelebrity)
     res.render("celebrities/celebrities.hbs", {
-      allCelebrities
+      allCelebrity
+      
     })
   } catch (error) {
     next(error)

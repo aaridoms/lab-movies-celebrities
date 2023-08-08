@@ -1,0 +1,19 @@
+<div>
+
+<h2>Todos los detalles sobre la pelicula {{oneMovie.title}}</h2>
+
+<p>Titulo:  {{oneMovie.title}}</p>
+<p> Género: {{oneMovie.genre}}</p>
+<p>Trama: {{oneMovie.genre}}</p>
+
+<p>Famosos:
+
+{{#each oneMovie.cast}}
+<li>{{this.name}}</li>
+<li>{{this.occupation}}</li>
+<li>{{this.catchPhrase}}</li>
+
+{{/each}}
+</p>
+
+</div>

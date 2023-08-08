@@ -1,12 +1,12 @@
 //  Add your code here
 const { Schema, model } = require("mongoose")
 
-const celebritiesSchema = new Schema({
+const celebritySchema = new Schema({
     name: String,
     occupation: String,
     catchPhrase: String
 });
 
-const Celebrities = model("Celebrities", celebritiesSchema);
 
-module.exports = Celebrities
+const Celebrity = model("Celebrity", celebritySchema);
+module.exports = Celebrity
