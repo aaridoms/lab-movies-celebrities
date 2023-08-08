@@ -12,17 +12,12 @@
         <input type="text" name="plot">
    
     <select name="cast">
-{{#each allCelebrity}}
+        {{#each allCelebrity}}
 
-<option value="{{this._id}}" selected>{{this.name}}</option>
+            <option value="{{this._id}}" selected>{{this.name}}</option>
 
-{{/each}}
-
-
+        {{/each}}
     </select>
-     
-        
-
-        <button>Crear Pelicula</button>
+    <button>Crear Pelicula</button>
     </form>
 </div>

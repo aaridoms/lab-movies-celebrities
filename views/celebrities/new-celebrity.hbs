@@ -2,15 +2,19 @@
     <h2>New Celebrity</h2>
 
     <form action="/Celebrity/create" method="post">
-        <label for="name">Nombre</label>
-        <input type="text" name="name">
+    <div class="mb-3">
+        <label for="name" class="form-label">Nombre</label>
+        <input type="text" name="name" class="form-control">
+    </div>
+    <div class="mb-3">
+        <label for="occupation" class="form-label">Profesion</label>
+        <input type="text" name="occupation" class="form-control">
+    </div>
+    <div class="mb-3">
+        <label for="catchPhrase" class="form-label">Frase</label>
+        <input type="text" name="catchPhrase" class="form-control">
+    </div>
 
-        <label for="occupation">Profesion</label>
-        <input type="text" name="occupation">
-
-        <label for="catchPhrase">Frase</label>
-        <input type="text" name="catchPhrase">
-
-        <button>Crear</button>
+        <button class="btn btn-outline-info">Crear</button>
     </form>
 </div>

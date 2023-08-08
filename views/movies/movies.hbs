@@ -2,15 +2,16 @@
 
 <h1>Todas las peliculas</h1>
 
-{{#each allMovies}}
+<div class="list-group">
 
-<a href="/movies/{{this._id}}">
-    <li>
-        {{this.title}}
-    </li>
-</a>
-
-{{/each}}
+    {{#each allMovies}}
+    <a href="/movies/{{this._id}}" class="list-group-item list-group-item-action">
+        
+            {{this.title}}
+        
+    </a>
+    {{/each}}
+</div>
 
 
 

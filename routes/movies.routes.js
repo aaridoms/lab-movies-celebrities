@@ -21,42 +21,77 @@ router.post("/create", async (req, res, next) => {
   try {
     const { title, genre, plot, cast } = req.body;
     console.log(cast);
-    const newMovie = await Movie.create({ title, genre, plot, cast })
+    const newMovie = await Movie.create({ title, genre, plot, cast });
     console.log(newMovie);
 
-  res.redirect("/movies")
+    res.redirect("/movies");
   } catch (error) {
     next(error);
   }
 });
 
 // GET /movies show all movies
-router.get("/", async (req,res,next)=>{
+router.get("/", async (req, res, next) => {
+  try {
+    const allMovies = await Movie.find();
+    res.render("movies/movies.hbs", { allMovies });
+  } catch (error) {
+    next(error);
+  }
+});
+
+// GET /movies/:id show the details of all movies
+router.get("/:movieId", async (req, res, next) => {
+  try {
+    const oneMovie = await Movie.findById(req.params.movieId).populate("cast");
+    console.log(oneMovie);
+    res.render("movies/movie-details.hbs", {
+      oneMovie,
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+// POST "/movies/:id/delete	" => Delete a specific movie
+router.post("/:movieId/delete", async (req, res, next) => {
+  const { movieId } = req.params
 
   try {
-    const allMovies = await Movie.find()
-    res.render("movies/movies.hbs",{allMovies})
+    await Movie.findByIdAndDelete(movieId)
+    res.redirect("/movies")
   } catch (error) {
     next(error)
   }
-})
+});
 
-// GET /movies/:id show the details of all movies
-
-router.get("/:movieId", async (req,res,next)=>{
-
+// GET "/:movieId/edit" => Show a form to edit a movie
+router.get("/:movieId/edit", async (req, res, next) => {
   try {
-
     const oneMovie = await Movie.findById(req.params.movieId)
-    .populate("cast")
-console.log(oneMovie)
-    res.render("movies/movie-details.hbs",{ 
-      oneMovie
+    const oneCelebrity = await Celebrity.find()
+
+    res.render("movies/edit-movie", {
+      oneMovie,
+      oneCelebrity
     })
 
   } catch (error) {
-    next (error)
+    next(error)
   }
-})
+});
+
+// POST "/movies/:movieId/edit" => Send the data from the form to this route to update the specific movie
+router.post("/:movieId/edit", async (req, res, next) => {
+
+  const { title, genre, plot, cast } = req.body;
+
+  try {
+    await Movie.findByIdAndUpdate(req.params.movieId, { title, genre, plot, cast })
+    res.redirect("/movies")
+  } catch (error) {
+    next(error)
+  }
+});
 
 module.exports = router;
